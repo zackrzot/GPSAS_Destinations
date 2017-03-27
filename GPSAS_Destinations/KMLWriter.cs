@@ -11,16 +11,22 @@ namespace GPSAS_Destinations
 {
     public class KMLWriter
     {
+        public static Boolean kmlEnabled { get; set; }
+        public static decimal minAreaTime { get; set; }
 
-
-        public KMLWriter(DataPoint[] arrData, String dir, String fileName)
+        public KMLWriter(DataPoint[] arrData, String dir, String fileName, Dictionary<int, Double> areaTimes)
         {
+            if (!kmlEnabled)
+            {
+                Logger.Log("KML is disabled. Not generating KML file.");
+                return;
+            }
+
             Logger.Log("Generating KML for file: " + fileName);
 
             try
             {
-                gererateKML(arrData, dir, fileName, true);
-                gererateKML(arrData, dir, fileName, false);
+                gererateKML(arrData, dir, fileName, areaTimes);
             }
             catch(Exception ex)
             {
@@ -30,7 +36,7 @@ namespace GPSAS_Destinations
             }
         }
 
-        private void gererateKML(DataPoint[] arrData, String dir, String fileName, Boolean withNoise)
+        private void gererateKML(DataPoint[] arrData, String dir, String fileName, Dictionary<int, Double> areaTimes)
         {
             Document doc = new Document();
 
@@ -38,33 +44,29 @@ namespace GPSAS_Destinations
 
             for (int i = 0; i < arrData.Length; i++)
             {
-                Point point = new Point();
                 DataPoint dataPoint = arrData[i];
 
-                point.Coordinate = new Vector(dataPoint.LAT, dataPoint.LON);
+                double areaTime;
 
-                Placemark placemark = new Placemark();
-                placemark.Geometry = point;
-                if (dataPoint.AID == ClusterComputer.NOISE)
-                    placemark.Name = "NOISE";
-                else
+                // Check if point meets min area time threshold, and check that it is not noise
+                if ((areaTimes.TryGetValue(dataPoint.AID, out areaTime)) && (areaTime >= (double) minAreaTime) && (dataPoint.AID != ClusterComputer.NOISE))
+                {
+                    Point point = new Point();
+                    point.Coordinate = new Vector(dataPoint.LAT, dataPoint.LON);
+
+                    Placemark placemark = new Placemark();
+                    placemark.Geometry = point;
                     placemark.Name = String.Format("{0} - {1}", dataPoint.AID.ToString(), dataPoint.IID.ToString());
 
-                if(withNoise)
                     doc.AddFeature(placemark);
-                else
-                    if(dataPoint.AID != ClusterComputer.NOISE)
-                        doc.AddFeature(placemark);
-
+                }
             }
 
             KmlFile file = KmlFile.Create(doc, true);
 
             String fName;
-            if (withNoise)
-                fName = String.Format(@"\{0}_With_Noise.kml", fileName);
-            else
-                fName = String.Format(@"\{0}.kml", fileName);
+
+            fName = String.Format(@"\{0}_MinAreaTime_{1}.kml", fileName, minAreaTime.ToString());
 
             FileStream outStream = new FileStream(dir + fName, FileMode.Create, FileAccess.ReadWrite);
 
@@ -72,7 +74,5 @@ namespace GPSAS_Destinations
 
             outStream.Close();
         }
-
-
     }
 }

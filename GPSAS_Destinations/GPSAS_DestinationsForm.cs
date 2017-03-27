@@ -229,11 +229,6 @@ namespace GPSAS_Destinations
         {
             try
             {
-                // Check radio button
-                if (Properties.Settings.Default.Haversine)
-                    radioButton_haversine.Checked = true;
-                else
-                    radioButton_dist.Checked = true;
                 // Set numeric up downs
                 numericUpDown_dist.Value = Properties.Settings.Default.DeltaDist;
                 numericUpDown_time.Value = Properties.Settings.Default.DeltaTime;
@@ -247,7 +242,6 @@ namespace GPSAS_Destinations
         /// </summary>
         private void saveSettings()
         {
-            Properties.Settings.Default.Haversine = radioButton_haversine.Checked;
             Properties.Settings.Default.DeltaDist = numericUpDown_dist.Value;
             Properties.Settings.Default.DeltaTime = numericUpDown_time.Value;
             Properties.Settings.Default.MinPoints = numericUpDown_pts.Value;
@@ -302,11 +296,6 @@ namespace GPSAS_Destinations
         /// </summary>
         private void setClusterComputerValues()
         {
-            // Set distance formula
-            if (radioButton_haversine.Checked)
-                ClusterComputer.HaversineOn = true;
-            else
-                ClusterComputer.HaversineOn = false;
             // Set parameters
             ClusterComputer.DELTA_DIST_THRESHOLD = (Double)numericUpDown_dist.Value;
             ClusterComputer.DELTA_TIME_THRESHOLD = (Double)numericUpDown_time.Value;
@@ -432,6 +421,9 @@ namespace GPSAS_Destinations
                 return;
             }
 
+            // Update latest KML changes
+            updateKMLSettings();
+
             // Verify that the provided directory is valid
             if (!isDirectoryValid(textBox_out.Text))
             {
@@ -515,5 +507,34 @@ namespace GPSAS_Destinations
 
         #endregion
 
+        private void radioButton_kml_true_CheckedChanged(object sender, EventArgs e)
+        {
+            updateKMLSettings();
+        }
+
+        private void radioButton_kml_false_CheckedChanged(object sender, EventArgs e)
+        {
+            updateKMLSettings();
+        }
+
+        private void numericUpDown_kml_ValueChanged(object sender, EventArgs e)
+        {
+            updateKMLSettings();
+        }
+
+        private void updateKMLSettings()
+        {
+            if (radioButton_kml_true.Checked)
+            {
+                numericUpDown_kml.Enabled = true;
+                KMLWriter.kmlEnabled = true;
+            }
+            else
+            {
+                numericUpDown_kml.Enabled = false;
+                KMLWriter.kmlEnabled = false;
+            }
+            KMLWriter.minAreaTime = numericUpDown_kml.Value;
+        }
     }
 }

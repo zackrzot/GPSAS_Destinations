@@ -32,10 +32,12 @@
             this.button_open = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBox_params = new System.Windows.Forms.GroupBox();
+            this.groupBox_kml = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.radioButton_kml_false = new System.Windows.Forms.RadioButton();
+            this.radioButton_kml_true = new System.Windows.Forms.RadioButton();
+            this.numericUpDown_kml = new System.Windows.Forms.NumericUpDown();
             this.button_saveparams = new System.Windows.Forms.Button();
-            this.groupBox_dist = new System.Windows.Forms.GroupBox();
-            this.radioButton_dist = new System.Windows.Forms.RadioButton();
-            this.radioButton_haversine = new System.Windows.Forms.RadioButton();
             this.numericUpDown_pts = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.numericUpDown_time = new System.Windows.Forms.NumericUpDown();
@@ -54,7 +56,8 @@
             this.buttonSelectFiles = new System.Windows.Forms.Button();
             this.progressBar_overall = new System.Windows.Forms.ProgressBar();
             this.groupBox_params.SuspendLayout();
-            this.groupBox_dist.SuspendLayout();
+            this.groupBox_kml.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_kml)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_time)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_dist)).BeginInit();
@@ -73,8 +76,8 @@
             // 
             // groupBox_params
             // 
+            this.groupBox_params.Controls.Add(this.groupBox_kml);
             this.groupBox_params.Controls.Add(this.button_saveparams);
-            this.groupBox_params.Controls.Add(this.groupBox_dist);
             this.groupBox_params.Controls.Add(this.numericUpDown_pts);
             this.groupBox_params.Controls.Add(this.label5);
             this.groupBox_params.Controls.Add(this.numericUpDown_time);
@@ -83,16 +86,86 @@
             this.groupBox_params.Controls.Add(this.numericUpDown_dist);
             this.groupBox_params.Controls.Add(this.label2);
             this.groupBox_params.Controls.Add(this.label1);
-            this.groupBox_params.Location = new System.Drawing.Point(229, 12);
+            this.groupBox_params.Location = new System.Drawing.Point(197, 12);
             this.groupBox_params.Name = "groupBox_params";
-            this.groupBox_params.Size = new System.Drawing.Size(245, 203);
+            this.groupBox_params.Size = new System.Drawing.Size(281, 203);
             this.groupBox_params.TabIndex = 1;
             this.groupBox_params.TabStop = false;
             this.groupBox_params.Text = "Parameters";
             // 
+            // groupBox_kml
+            // 
+            this.groupBox_kml.Controls.Add(this.label7);
+            this.groupBox_kml.Controls.Add(this.radioButton_kml_false);
+            this.groupBox_kml.Controls.Add(this.radioButton_kml_true);
+            this.groupBox_kml.Controls.Add(this.numericUpDown_kml);
+            this.groupBox_kml.Location = new System.Drawing.Point(9, 102);
+            this.groupBox_kml.Name = "groupBox_kml";
+            this.groupBox_kml.Size = new System.Drawing.Size(265, 60);
+            this.groupBox_kml.TabIndex = 15;
+            this.groupBox_kml.TabStop = false;
+            this.groupBox_kml.Text = "KML";
+            // 
+            // label7
+            // 
+            this.label7.AccessibleRole = System.Windows.Forms.AccessibleRole.OutlineButton;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(218, 21);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(44, 13);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Minutes";
+            // 
+            // radioButton_kml_false
+            // 
+            this.radioButton_kml_false.AutoSize = true;
+            this.radioButton_kml_false.Location = new System.Drawing.Point(6, 37);
+            this.radioButton_kml_false.Name = "radioButton_kml_false";
+            this.radioButton_kml_false.Size = new System.Drawing.Size(136, 17);
+            this.radioButton_kml_false.TabIndex = 20;
+            this.radioButton_kml_false.Text = "Do not generate a KML";
+            this.radioButton_kml_false.UseVisualStyleBackColor = true;
+            this.radioButton_kml_false.CheckedChanged += new System.EventHandler(this.radioButton_kml_false_CheckedChanged);
+            // 
+            // radioButton_kml_true
+            // 
+            this.radioButton_kml_true.AutoSize = true;
+            this.radioButton_kml_true.Checked = true;
+            this.radioButton_kml_true.Location = new System.Drawing.Point(6, 17);
+            this.radioButton_kml_true.Name = "radioButton_kml_true";
+            this.radioButton_kml_true.Size = new System.Drawing.Size(159, 17);
+            this.radioButton_kml_true.TabIndex = 19;
+            this.radioButton_kml_true.TabStop = true;
+            this.radioButton_kml_true.Text = "Plot points with AreaTime >=";
+            this.radioButton_kml_true.UseVisualStyleBackColor = true;
+            this.radioButton_kml_true.CheckedChanged += new System.EventHandler(this.radioButton_kml_true_CheckedChanged);
+            // 
+            // numericUpDown_kml
+            // 
+            this.numericUpDown_kml.Location = new System.Drawing.Point(165, 17);
+            this.numericUpDown_kml.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.numericUpDown_kml.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_kml.Name = "numericUpDown_kml";
+            this.numericUpDown_kml.Size = new System.Drawing.Size(52, 20);
+            this.numericUpDown_kml.TabIndex = 17;
+            this.numericUpDown_kml.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown_kml.ValueChanged += new System.EventHandler(this.numericUpDown_kml_ValueChanged);
+            // 
             // button_saveparams
             // 
-            this.button_saveparams.Location = new System.Drawing.Point(64, 168);
+            this.button_saveparams.Location = new System.Drawing.Point(84, 168);
             this.button_saveparams.Name = "button_saveparams";
             this.button_saveparams.Size = new System.Drawing.Size(119, 23);
             this.button_saveparams.TabIndex = 16;
@@ -100,45 +173,10 @@
             this.button_saveparams.UseVisualStyleBackColor = true;
             this.button_saveparams.Click += new System.EventHandler(this.button_saveparams_Click);
             // 
-            // groupBox_dist
-            // 
-            this.groupBox_dist.Controls.Add(this.radioButton_dist);
-            this.groupBox_dist.Controls.Add(this.radioButton_haversine);
-            this.groupBox_dist.Location = new System.Drawing.Point(9, 102);
-            this.groupBox_dist.Name = "groupBox_dist";
-            this.groupBox_dist.Size = new System.Drawing.Size(224, 60);
-            this.groupBox_dist.TabIndex = 13;
-            this.groupBox_dist.TabStop = false;
-            this.groupBox_dist.Text = "Distance Calculation";
-            // 
-            // radioButton_dist
-            // 
-            this.radioButton_dist.AutoSize = true;
-            this.radioButton_dist.Location = new System.Drawing.Point(7, 39);
-            this.radioButton_dist.Name = "radioButton_dist";
-            this.radioButton_dist.Size = new System.Drawing.Size(107, 17);
-            this.radioButton_dist.TabIndex = 14;
-            this.radioButton_dist.Text = "Distance Formula";
-            this.radioButton_dist.UseVisualStyleBackColor = true;
-            this.radioButton_dist.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
-            // 
-            // radioButton_haversine
-            // 
-            this.radioButton_haversine.AutoSize = true;
-            this.radioButton_haversine.Checked = true;
-            this.radioButton_haversine.Location = new System.Drawing.Point(7, 19);
-            this.radioButton_haversine.Name = "radioButton_haversine";
-            this.radioButton_haversine.Size = new System.Drawing.Size(113, 17);
-            this.radioButton_haversine.TabIndex = 13;
-            this.radioButton_haversine.TabStop = true;
-            this.radioButton_haversine.Text = "Haversine Formula";
-            this.radioButton_haversine.UseVisualStyleBackColor = true;
-            this.radioButton_haversine.CheckedChanged += new System.EventHandler(this.radioButton_haversine_CheckedChanged);
-            // 
             // numericUpDown_pts
             // 
             this.numericUpDown_pts.AccessibleRole = System.Windows.Forms.AccessibleRole.OutlineButton;
-            this.numericUpDown_pts.Location = new System.Drawing.Point(99, 76);
+            this.numericUpDown_pts.Location = new System.Drawing.Point(121, 76);
             this.numericUpDown_pts.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -163,7 +201,7 @@
             // 
             this.label5.AccessibleRole = System.Windows.Forms.AccessibleRole.OutlineButton;
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(37, 78);
+            this.label5.Location = new System.Drawing.Point(59, 78);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(56, 13);
             this.label5.TabIndex = 10;
@@ -172,7 +210,7 @@
             // numericUpDown_time
             // 
             this.numericUpDown_time.AccessibleRole = System.Windows.Forms.AccessibleRole.OutlineButton;
-            this.numericUpDown_time.Location = new System.Drawing.Point(99, 51);
+            this.numericUpDown_time.Location = new System.Drawing.Point(121, 51);
             this.numericUpDown_time.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -197,7 +235,7 @@
             // 
             this.label3.AccessibleRole = System.Windows.Forms.AccessibleRole.OutlineButton;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(194, 53);
+            this.label3.Location = new System.Drawing.Point(216, 53);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 13);
             this.label3.TabIndex = 8;
@@ -207,7 +245,7 @@
             // 
             this.label4.AccessibleRole = System.Windows.Forms.AccessibleRole.OutlineButton;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(2, 53);
+            this.label4.Location = new System.Drawing.Point(24, 53);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(91, 13);
             this.label4.TabIndex = 7;
@@ -215,7 +253,7 @@
             // 
             // numericUpDown_dist
             // 
-            this.numericUpDown_dist.Location = new System.Drawing.Point(99, 25);
+            this.numericUpDown_dist.Location = new System.Drawing.Point(121, 25);
             this.numericUpDown_dist.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -239,7 +277,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(194, 27);
+            this.label2.Location = new System.Drawing.Point(216, 27);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 13);
             this.label2.TabIndex = 5;
@@ -248,7 +286,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 27);
+            this.label1.Location = new System.Drawing.Point(28, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 13);
             this.label1.TabIndex = 3;
@@ -257,15 +295,15 @@
             // textBox_out
             // 
             this.textBox_out.Enabled = false;
-            this.textBox_out.Location = new System.Drawing.Point(293, 220);
+            this.textBox_out.Location = new System.Drawing.Point(261, 220);
             this.textBox_out.Name = "textBox_out";
             this.textBox_out.ReadOnly = true;
-            this.textBox_out.Size = new System.Drawing.Size(181, 20);
+            this.textBox_out.Size = new System.Drawing.Size(213, 20);
             this.textBox_out.TabIndex = 2;
             // 
             // button_save_dir
             // 
-            this.button_save_dir.Location = new System.Drawing.Point(229, 218);
+            this.button_save_dir.Location = new System.Drawing.Point(197, 217);
             this.button_save_dir.Name = "button_save_dir";
             this.button_save_dir.Size = new System.Drawing.Size(58, 23);
             this.button_save_dir.TabIndex = 3;
@@ -316,14 +354,14 @@
             this.listBoxSelectedFiles.FormattingEnabled = true;
             this.listBoxSelectedFiles.Location = new System.Drawing.Point(12, 10);
             this.listBoxSelectedFiles.Name = "listBoxSelectedFiles";
-            this.listBoxSelectedFiles.Size = new System.Drawing.Size(211, 264);
+            this.listBoxSelectedFiles.Size = new System.Drawing.Size(179, 264);
             this.listBoxSelectedFiles.TabIndex = 16;
             // 
             // buttonSelectFiles
             // 
             this.buttonSelectFiles.Location = new System.Drawing.Point(12, 276);
             this.buttonSelectFiles.Name = "buttonSelectFiles";
-            this.buttonSelectFiles.Size = new System.Drawing.Size(211, 22);
+            this.buttonSelectFiles.Size = new System.Drawing.Size(179, 22);
             this.buttonSelectFiles.TabIndex = 17;
             this.buttonSelectFiles.Text = "Select Files";
             this.buttonSelectFiles.UseVisualStyleBackColor = true;
@@ -359,8 +397,9 @@
             this.Text = "GPSAS_Destinations";
             this.groupBox_params.ResumeLayout(false);
             this.groupBox_params.PerformLayout();
-            this.groupBox_dist.ResumeLayout(false);
-            this.groupBox_dist.PerformLayout();
+            this.groupBox_kml.ResumeLayout(false);
+            this.groupBox_kml.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_kml)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_pts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_time)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_dist)).EndInit();
@@ -386,15 +425,17 @@
         private System.Windows.Forms.Button button_save_dir;
         private System.Windows.Forms.ProgressBar progressBar_parse;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.GroupBox groupBox_dist;
-        private System.Windows.Forms.RadioButton radioButton_dist;
-        private System.Windows.Forms.RadioButton radioButton_haversine;
         private System.Windows.Forms.Label label_status;
         private System.Windows.Forms.Button button_stop;
         private System.Windows.Forms.Button button_saveparams;
         private System.Windows.Forms.ListBox listBoxSelectedFiles;
         private System.Windows.Forms.Button buttonSelectFiles;
         private System.Windows.Forms.ProgressBar progressBar_overall;
+        private System.Windows.Forms.GroupBox groupBox_kml;
+        private System.Windows.Forms.NumericUpDown numericUpDown_kml;
+        private System.Windows.Forms.RadioButton radioButton_kml_false;
+        private System.Windows.Forms.RadioButton radioButton_kml_true;
+        private System.Windows.Forms.Label label7;
     }
 }
 

@@ -28,7 +28,7 @@ namespace GPSAS_Destinations
         public static Double DELTA_DIST_THRESHOLD { get; set; }             // Maximum radius of a center data point to determine a cluster
         public static Double DELTA_TIME_THRESHOLD { get; set; }             // Maximum time difference between two entries within a location cluster to determine the same instance 
         public static int MINPTS { get; set; }                              // Min points in a location to be considered a cluster
-        public static Boolean HaversineOn { get; set; }                     // Whether to use haversine or basic distance formula
+        public static Boolean HaversineOn = true;                   // Whether to use haversine or basic distance formula
         public static List<DataPoint> DataPoints = new List<DataPoint>();   // Dynamic list that temporarily stores the entries to be parsed
 
         #endregion
@@ -325,7 +325,7 @@ namespace GPSAS_Destinations
         {
             originalFileName = originalFileName.Replace(".xlsx", "").Replace(".xls", ""); ;
 
-            KMLWriter kmlw = new KMLWriter(arrData, workingDirectory, originalFileName);
+            KMLWriter kmlw = new KMLWriter(arrData, workingDirectory, originalFileName, areaTimes);
 
             GPSAS_DestinationsFormInstance.SetStatusText("Writing results");
             try
