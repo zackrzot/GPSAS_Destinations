@@ -57,15 +57,15 @@ namespace GPSAS_Destinations
             {
                 try
                 {
-                    if (dataRow.ItemArray[col].ToString() == dateTimeString)
+                    if (dataRow.ItemArray[col].ToString().ToLower() == dateTimeString.ToLower())
                         dateTimeRow = col;
-                    if (dataRow.ItemArray[col].ToString() == latitudeString)
+                    if (dataRow.ItemArray[col].ToString().ToLower() == latitudeString.ToLower())
                         latitudeRow = col;
-                    if (dataRow.ItemArray[col].ToString() == longitudeString)
+                    if (dataRow.ItemArray[col].ToString().ToLower() == longitudeString.ToLower())
                         longitudeRow = col;
-                    if (dataRow.ItemArray[col].ToString() == settingString)
+                    if (dataRow.ItemArray[col].ToString().ToLower() == settingString.ToLower())
                         settingRow = col;
-                    if (dataRow.ItemArray[col].ToString() == idString)
+                    if (dataRow.ItemArray[col].ToString().ToLower() == idString.ToLower())
                         idRow = col;
                 }
                 catch { break; }
