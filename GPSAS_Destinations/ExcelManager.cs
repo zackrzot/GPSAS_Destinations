@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Excel;
+using System;
 using System.Collections.Generic;
-using System.IO;
-using Excel;
 using System.Data;
 using System.Globalization;
+using System.IO;
 
 namespace GPSAS_Destinations
 {
@@ -52,22 +52,34 @@ namespace GPSAS_Destinations
         /// <param name="dataRow">Data row that contains column names.</param>
         private static void assignColumnNumbers(DataRow dataRow)
         {
-            dateTimeRow = latitudeRow = longitudeRow = settingRow = idRow  = -1;
+            // This code will identify which column the expected lables are in. Capitalization does not matter.
+            // Longitude - longitude of datapoint 
+            // Latitude - latitude of datapoint
+            // DateTimeS - timestamp of when the data point was captured
+            // Setting - optional value - can be used to add a known label to a datapoint. column still required to be present in file.
+            // ID - external id given to data point
+            dateTimeRow = latitudeRow = longitudeRow = settingRow = idRow = -1;
+
+            // Iterate through all columns containing data. The value of 50 is arbitrary. 
             for (int col = 0; col < 50; col++)
             {
                 try
                 {
-                    if (dataRow.ItemArray[col].ToString().ToLower() == dateTimeString.ToLower())
+                    // header col cell text
+                    string cellText = dataRow.ItemArray[col].ToString().ToLower();
+
+                    if (cellText == dateTimeString.ToLower())
                         dateTimeRow = col;
-                    if (dataRow.ItemArray[col].ToString().ToLower() == latitudeString.ToLower())
+                    if (cellText == latitudeString.ToLower())
                         latitudeRow = col;
-                    if (dataRow.ItemArray[col].ToString().ToLower() == longitudeString.ToLower())
+                    if (cellText == longitudeString.ToLower())
                         longitudeRow = col;
-                    if (dataRow.ItemArray[col].ToString().ToLower() == settingString.ToLower())
+                    if (cellText == settingString.ToLower())
                         settingRow = col;
-                    if (dataRow.ItemArray[col].ToString().ToLower() == idString.ToLower())
+                    if (cellText == idString.ToLower())
                         idRow = col;
                 }
+                // Just break when end of data is reached.
                 catch { break; }
             }
             Logger.Log("dateTimeRow col was: " + dateTimeRow.ToString());
@@ -124,14 +136,14 @@ namespace GPSAS_Destinations
                 {
                     Logger.Log("Unable to parse row in dataset. Error: " + ex.ToString() + " Row: " + c.ToString());
                 }
-                if(String.IsNullOrEmpty(id))
+                if (String.IsNullOrEmpty(id))
                     c++;
-                if(c > 10)
+                if (c > 10)
                 {
                     Logger.Log("EOF detected.");
                     return;
                 }
-                
+
             }
         }
 

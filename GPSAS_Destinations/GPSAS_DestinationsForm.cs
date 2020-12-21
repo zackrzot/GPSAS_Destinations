@@ -384,7 +384,7 @@ namespace GPSAS_Destinations
                     if (ex is IOException)
                         showAsyncMessagebox("Unable to open file. Make sure the file is not open: " + fileName, "Error");
                     else if (ex is ExcelManager.ExcelParseExceptin)
-                        showAsyncMessagebox("Unable to find the necessary columns in the provided data file: " + fileName, "Error");
+                        showAsyncMessagebox("See log for missing columns with value -1. Unable to find the necessary columns in the provided data file: " + fileName, "Error");
                     else
                         showAsyncMessagebox("Unable to load data from file: " + fileName, "Error");
                 }
